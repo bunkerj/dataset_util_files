@@ -5,9 +5,9 @@ import argparse
 from PIL import Image
 
 parser = argparse.ArgumentParser()
-parser = parser.add_argument('--img_src', type=str, required=True)
-parser = parser.add_argument('--json_src', type=str, required=True)
-parser = parser.add_argument('--dest', type=str, required=True)
+parser.add_argument('--img_src', type=str, required=True)
+parser.add_argument('--json_src', type=str, required=True)
+parser.add_argument('--dest', type=str, required=True)
 
 
 def copy_images_to_dest_path(img_dir_src_path, src_img_names, dest_path):
@@ -25,7 +25,7 @@ def copy_images_to_dest_path(img_dir_src_path, src_img_names, dest_path):
         except shutil.SameFileError:
             print('Source and destination are the same')
 
-def write_label_files(img_ann, src_img_names, dest_path):
+def write_label_files(img_ann, img_dir_src_path, src_img_names, dest_path):
     print('Writing label files...')
 
     dest_dir_labels = os.path.join(dest_path, 'labels')
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         data = json.load(f)
 
     img_ann = get_image_annotations(data)
-    write_label_files(img_ann, src_img_names, dest_path)
+    write_label_files(img_ann, img_src, src_img_names, dest_path)
     copy_images_to_dest_path(img_src, src_img_names, dest_path)
 
     print('Done!')
