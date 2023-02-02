@@ -86,23 +86,18 @@ def get_points_str(points, w, h):
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    src_path = args.img_src
-    src_path = args.json_src
+    img_src = args.img_src
+    json_src = args.json_src
     dest_path = args.dest
 
-    img_dir_src_path = '/Users/jbunker/Desktop/pothole_data/POTHOLES'
-    json_src_path = '/Users/jbunker/Desktop/pothole_data/via_project_31Jan2023_11h5m_json-2.json'
-    csv_src_path = '/Users/jbunker/Desktop/pothole_data/via_project_31Jan2023_11h5m_csv-2.csv'
-    dest_path = '/Users/jbunker/Desktop/dest_data'
-
-    src_img_names = os.listdir(img_dir_src_path)
+    src_img_names = os.listdir(img_src)
     shutil.rmtree(dest_path)
 
-    with open(json_src_path) as f:
+    with open(json_src) as f:
         data = json.load(f)
 
     img_ann = get_image_annotations(data)
     write_label_files(img_ann, src_img_names, dest_path)
-    copy_images_to_dest_path(img_dir_src_path, src_img_names, dest_path)
+    copy_images_to_dest_path(img_src, src_img_names, dest_path)
 
     print('Done!')
