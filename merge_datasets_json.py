@@ -23,5 +23,5 @@ if __name__ == '__main__':
         '../../../Desktop/L1_Additional/data.json',
         '../../../Desktop/L2/data.json',
     ]
-    dest_path = '../../../Desktop/pothole_dataset'
+    dest_path = '../../../Desktop/pothole_data/region_data.json'
     merge_datasets(src_paths, dest_path)
